@@ -4,6 +4,7 @@ import { HeaderSection } from "./HomePage/sections/HeaderSection/HeaderSection";
 import { FooterSection } from "./HomePage/sections/FooterSection";
 import { strapiService, StrapiData, BlogArticle } from "../services/strapi";
 import { CallToActionBanner } from "../components/CallToActionBanner";
+import { API_URL } from "../lib/config";
 
 export default function ArticleDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -93,7 +94,7 @@ export default function ArticleDetailPage() {
       )
     : null;
   const firstImageUrl = firstImageBlock
-    ? `http://localhost:1337${firstImageBlock.image.data.attributes.url}`
+    ? `${API_URL}${firstImageBlock.image.data.attributes.url}`
     : null;
 
   return (
@@ -202,9 +203,9 @@ export default function ArticleDetailPage() {
                 // Gestion image Strapi v5 (direct ou imbriqué)
                 let imageUrl = null;
                 if (block.image && block.image.url) {
-                  imageUrl = `http://localhost:1337${block.image.url}`;
+                  imageUrl = `${API_URL}${block.image.url}`;
                 } else if (block.image && block.image.data && block.image.data.attributes?.url) {
-                  imageUrl = `http://localhost:1337${block.image.data.attributes.url}`;
+                  imageUrl = `${API_URL}${block.image.data.attributes.url}`;
                 }
                 if (imageUrl) {
                   return (
@@ -224,9 +225,9 @@ export default function ArticleDetailPage() {
               if (block.__component === 'blog.text-left') {
                 let imageUrl = null;
                 if (block.image && block.image.url) {
-                  imageUrl = `http://localhost:1337${block.image.url}`;
+                  imageUrl = `${API_URL}${block.image.url}`;
                 } else if (block.image && block.image.data && block.image.data.attributes?.url) {
-                  imageUrl = `http://localhost:1337${block.image.data.attributes.url}`;
+                  imageUrl = `${API_URL}${block.image.data.attributes.url}`;
                 }
                 return (
                   <div key={idx} className="mb-8">
@@ -253,9 +254,9 @@ export default function ArticleDetailPage() {
               if (block.__component === 'blog.text-right') {
                 let imageUrl = null;
                 if (block.image && block.image.url) {
-                  imageUrl = `http://localhost:1337${block.image.url}`;
+                  imageUrl = `${API_URL}${block.image.url}`;
                 } else if (block.image && block.image.data && block.image.data.attributes?.url) {
-                  imageUrl = `http://localhost:1337${block.image.data.attributes.url}`;
+                  imageUrl = `${API_URL}${block.image.data.attributes.url}`;
                 }
                 return (
                   <div key={idx} className="mb-8">

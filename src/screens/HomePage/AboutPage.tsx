@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { HeaderSection } from "./sections/HeaderSection/HeaderSection";
 import { FooterSection } from "./sections/FooterSection";
 import ClientLogosSection from "./sections/ClientLogosSection";
+import { API_URL } from "../../lib/config";
 
 interface AboutZone {
   title?: string;
@@ -24,7 +25,7 @@ export default function AboutPage() {
   const [data, setData] = useState<AboutData | null>(null);
 
   useEffect(() => {
-    fetch(`https://patient-respect-ce095df2e7.strapiapp.com/api/abouts?locale=${lang}`)
+    fetch(`${API_URL}/abouts?locale=${lang}`)
       .then(res => res.json())
       .then(json => {
         const about = json.data && json.data[0]

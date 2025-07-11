@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { useLocation } from "react-router-dom";
+import { API_URL } from "../../lib/config";
 
 // Type pour les données Strapi (flexible)
 interface EchangeExpert {
@@ -17,7 +18,7 @@ export const ContactUsSection = (): JSX.Element | null => {
   const [data, setData] = useState<EchangeExpert | null>(null);
 
   useEffect(() => {
-    fetch(`https://patient-respect-ce095df2e7.strapiapp.com/api/echange-experts?locale=${lang}`)
+    fetch(`${API_URL}/echange-experts?locale=${lang}`)
       .then(res => res.json())
       .then(json => {
         setData(json.data[0] ?? null); // Correction ici : plus de .attributes

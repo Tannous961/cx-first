@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const STRAPI_URL = 'http://localhost:1337';
+const STRAPI_URL = process.env.STRAPI_URL || 'http://localhost:1337';
 
 // Données de test pour les articles
 const testArticles = [
