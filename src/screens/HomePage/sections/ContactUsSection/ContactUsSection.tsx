@@ -18,7 +18,7 @@ export const ContactUsSection = (): JSX.Element | null => {
   const [data, setData] = useState<EchangeExpert | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/echange-experts?locale=${lang}`)
+    fetch(`${API_URL}/echange-expert?locale=${lang}`)
       .then(res => res.json())
       .then(json => {
         setData(json.data[0] ?? null); // Correction ici : plus de .attributes
