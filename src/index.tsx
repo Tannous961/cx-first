@@ -10,11 +10,13 @@ import SecteursPage from "./screens/SecteursPage";
 import RessourcesPage from "./screens/RessourcesPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageRedirector } from "./LanguageRedirector";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <BrowserRouter>
       <LanguageRedirector />
+      <SpeedInsights />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/plateforme" element={<PlateformePage />} />
