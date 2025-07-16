@@ -5,4 +5,4 @@ interface ImportMeta {
   };
 }
 
-export const API_URL = import.meta.env.VITE_API_URL || "https://patient-respect-ce095df2e7.strapiapp.com/api"; 
+export const API_URL = import.meta.env.VITE_API_URL || "https://cx-first-qualimetrie.vercel.app"; 
