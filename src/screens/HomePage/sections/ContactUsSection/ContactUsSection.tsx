@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { useLocation } from "react-router-dom";
-import { API_URL } from "../../lib/config";
+import { API_URL } from "../../../../lib/config";
 
 // Type pour les données Strapi (flexible)
 interface EchangeExpert {
