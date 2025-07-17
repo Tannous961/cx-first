@@ -4,6 +4,7 @@ import { HeaderSection } from "./sections/HeaderSection/HeaderSection";
 import { FooterSection } from "./sections/FooterSection";
 import ClientLogosSection from "./sections/ClientLogosSection";
 import { API_URL } from "../../lib/config";
+import { ContactUsSection } from "./sections/ContactUsSection/ContactUsSection";
 
 interface AboutZone {
   title?: string;
@@ -16,6 +17,8 @@ interface AboutData {
   leftzone1?: AboutZone[];
   leftzone2?: AboutZone[];
   rightzone?: AboutZone[];
+  bannerTitle?: string;
+  bannerDescription?: string;
 }
 
 export default function AboutPage() {
@@ -25,7 +28,7 @@ export default function AboutPage() {
   const [data, setData] = useState<AboutData | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/abouts?locale=${lang}`)
+    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=bannerImage`)
       .then(res => res.json())
       .then(json => {
         const about = json.data && json.data[0]
@@ -51,12 +54,18 @@ export default function AboutPage() {
             <a href="/ressources" className="underline">Ressources</a>
             <span> &gt; À propos</span>
           </nav>
-          <h1 className="text-5xl font-bold mb-8">À propos</h1>
-          <p className="text-xl">Découvrez notre équipe et notre mission</p>
+          <h1 className="text-5xl font-bold mb-8">{data.bannerTitle || "À propos"}</h1>
+          <p className="text-xl">{data.bannerDescription || "Découvrez notre équipe et notre mission"}</p>
         </div>
         <div className="w-1/2 h-full relative">
           <img
-            src={getImage("/about-people.jpg", data.bannerImage)}
+            src={
+              data.bannerImage && data.bannerImage.url
+                ? data.bannerImage.url.startsWith('http')
+                  ? data.bannerImage.url
+                  : `${API_URL}${data.bannerImage.url}`
+                : "/about-people.jpg"
+            }
             alt="Bannière À propos"
             className="object-cover w-full h-full"
             style={{ filter: "brightness(0.7)" }}
@@ -115,6 +124,7 @@ export default function AboutPage() {
       </section>
 
       <ClientLogosSection />
+      <ContactUsSection />
       <FooterSection />
     </main>
   );

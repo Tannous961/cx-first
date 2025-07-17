@@ -5,6 +5,7 @@ import ClientLogosSection from "./sections/ClientLogosSection";
 import { FilterBar } from "../../components/FilterBar";
 import { BlogCard } from "../../components/BlogCard";
 import { useLocation } from "react-router-dom";
+import { ContactUsSection } from "./sections/ContactUsSection/ContactUsSection";
 
 function getPageFromUrl() {
   if (typeof window === 'undefined') return 1;
@@ -173,6 +174,7 @@ export default function TestimonialsPage() {
           </a>
         )}
       </nav>
+      <ContactUsSection />
       <ClientLogosSection />
       <FooterSection />
     </main>

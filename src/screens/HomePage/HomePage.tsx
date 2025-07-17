@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ContactUsSection } from "./sections/ContactUsSection";
+import { ContactUsSection } from "./sections/ContactUsSection/ContactUsSection";
 import { DashboardSection } from "./sections/DashboardSection";
 import { FooterSection } from "./sections/FooterSection";
 import { HeaderSection } from "./sections/HeaderSection/HeaderSection";

@@ -5,6 +5,7 @@ import { FooterSection } from "./HomePage/sections/FooterSection";
 import { strapiService, StrapiData, BlogArticle } from "../services/strapi";
 import { CallToActionBanner } from "../components/CallToActionBanner";
 import { API_URL } from "../lib/config";
+import { ContactUsSection } from "./HomePage/sections/ContactUsSection/ContactUsSection";
 
 export default function ArticleDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -303,6 +304,7 @@ export default function ArticleDetailPage() {
         </div>
       </section>
 
+      <ContactUsSection />
       <FooterSection />
     </main>
   );

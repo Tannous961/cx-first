@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout } from "../components/Layout";
 import { PageGabarit, Article } from "../components/PageGabarit";
+import { ContactUsSection } from "./HomePage/sections/ContactUsSection/ContactUsSection";
 
 const articles: Article[] = [
   {
@@ -71,6 +72,7 @@ export default function RessourcesPage() {
         filters={filters}
         articles={articles}
       />
+      <ContactUsSection />
     </Layout>
   );
 } 
