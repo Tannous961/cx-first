@@ -295,3 +295,46 @@ npm run build
 3. Utilisez `vercel env ls` pour vérifier
 
 Avez-vous des questions sur une étape spécifique ? 
+
+---
+
+## 🛠️ Comment corriger l’appel API
+
+### 1. **Vérifie le nom du Content Type dans Strapi**
+- Si tu as créé un Content Type nommé **echange-expert** (singulier), Strapi va générer `/api/echange-experts` (pluriel).
+- Si tu as créé **echange-experts** (déjà au pluriel), l’URL sera `/api/echange-experts`.
+
+### 2. **Corrige l’appel dans le code**
+
+Va dans le fichier où l’appel est fait, probablement ici :  
+`src/screens/HomePage/sections/ContactUsSection/ContactUsSection.tsx`
+
+Repère la ligne :
+```js
+fetch(`${API_URL}/api/echange-expert?locale=${lang}`)
+```
+
+**Remplace par :**
+```js
+<code_block_to_apply_changes_from>
+```
+
+---
+
+## 🔎 Où corriger dans le code ?
+
+- **Fichier probable** :  
+  `src/screens/HomePage/sections/ContactUsSection/ContactUsSection.tsx`
+- **Recherche** :  
+  Cherche `echange-expert` (sans s) dans le code, et remplace par `echange-experts`.
+
+---
+
+## ✅ Résumé
+
+- L’URL Strapi pour une collection est toujours au **pluriel** : `/api/nom-du-content-type-s`
+- Corrige tous les appels dans le code pour utiliser `/api/echange-experts`
+
+---
+
+**Besoin d’aide pour faire la modification dans le code ? Je peux te donner le patch exact si tu veux !** 
