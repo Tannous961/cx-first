@@ -19,6 +19,9 @@ interface AboutData {
   rightzone?: AboutZone[];
   bannerTitle?: string;
   bannerDescription?: string;
+  leftzonetop?: AboutZone[];
+  rightzonecenter?: AboutZone[];
+  leftzonebottom?: AboutZone[];
 }
 
 export default function AboutPage() {
@@ -28,7 +31,7 @@ export default function AboutPage() {
   const [data, setData] = useState<AboutData | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=bannerImage`)
+    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=*`)
       .then(res => res.json())
       .then(json => {
         const about = json.data && json.data[0]
@@ -85,40 +88,58 @@ export default function AboutPage() {
           opacity: 1,
         }}
       >
-        {/* leftzone1 */}
-        {data.leftzone1 && data.leftzone1.map((zone, i) => (
-          <div key={"leftzone1-"+i} className="flex flex-row items-center justify-between max-w-6xl mx-auto gap-12 relative z-10">
+        {/* leftzonetop */}
+        {data.leftzonetop && data.leftzonetop.map((zone, i) => (
+          <div key={"leftzonetop-"+i} className="flex flex-row items-center justify-between max-w-6xl mx-auto gap-12 relative z-10">
             <div className="flex-1">
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            <div className="flex-1 flex justify-end">
-              <img src={getImage("/about-office-1.jpg", zone.image)} alt={zone.title || "Image"} className="rounded-2xl w-[350px] h-[220px] object-cover" />
-            </div>
+            {zone.image && zone.image.url && (
+              <div className="flex-1 flex justify-end">
+                <img
+                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  alt={zone.title || "Image"}
+                  className="rounded-2xl w-[350px] h-[220px] object-cover"
+                />
+              </div>
+            )}
           </div>
         ))}
-        {/* leftzone2 */}
-        {data.leftzone2 && data.leftzone2.map((zone, i) => (
-          <div key={"leftzone2-"+i} className="flex flex-row items-center justify-between max-w-6xl mx-auto gap-12 relative z-10">
+        {/* rightzonecenter */}
+        {data.rightzonecenter && data.rightzonecenter.map((zone, i) => (
+          <div key={"rightzonecenter-"+i} className="flex flex-row-reverse items-center justify-between max-w-6xl mx-auto gap-12">
             <div className="flex-1">
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            <div className="flex-1 flex justify-end">
-              <img src={getImage("/about-office-2.jpg", zone.image)} alt={zone.title || "Image"} className="rounded-2xl w-[350px] h-[220px] object-cover" />
-            </div>
+            {zone.image && zone.image.url && (
+              <div className="flex-1 flex justify-end">
+                <img
+                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  alt={zone.title || "Image"}
+                  className="rounded-2xl w-[350px] h-[220px] object-cover"
+                />
+              </div>
+            )}
           </div>
         ))}
-        {/* rightzone */}
-        {data.rightzone && data.rightzone.map((zone, i) => (
-          <div key={"rightzone-"+i} className="flex flex-row-reverse items-center justify-between max-w-6xl mx-auto gap-12">
+        {/* leftzonebottom */}
+        {data.leftzonebottom && data.leftzonebottom.map((zone, i) => (
+          <div key={"leftzonebottom-"+i} className="flex flex-row items-center justify-between max-w-6xl mx-auto gap-12 relative z-10">
             <div className="flex-1">
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            <div className="flex-1 flex justify-end">
-              <img src={getImage("/about-office-3.jpg", zone.image)} alt={zone.title || "Image"} className="rounded-2xl w-[350px] h-[220px] object-cover" />
-            </div>
+            {zone.image && zone.image.url && (
+              <div className="flex-1 flex justify-end">
+                <img
+                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  alt={zone.title || "Image"}
+                  className="rounded-2xl w-[350px] h-[220px] object-cover"
+                />
+              </div>
+            )}
           </div>
         ))}
       </section>
