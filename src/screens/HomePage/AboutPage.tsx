@@ -9,7 +9,7 @@ import { ContactUsSection } from "./sections/ContactUsSection/ContactUsSection";
 interface AboutZone {
   title?: string;
   description?: string;
-  image?: { url: string };
+  image?: { url: string }[];
 }
 
 interface AboutData {
@@ -31,7 +31,7 @@ export default function AboutPage() {
   const [data, setData] = useState<AboutData | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=*`)
+    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=bannerImage&populate[leftzonetop][populate][0]=image&populate[rightzonecenter][populate][0]=image&populate[leftzonebottom][populate][0]=image`)
       .then(res => res.json())
       .then(json => {
         const about = json.data && json.data[0]
@@ -95,10 +95,10 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.url && (
+            {zone.image && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
-                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
                   alt={zone.title || "Image"}
                   className="rounded-2xl w-[350px] h-[220px] object-cover"
                 />
@@ -113,10 +113,10 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.url && (
+            {zone.image && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
-                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
                   alt={zone.title || "Image"}
                   className="rounded-2xl w-[350px] h-[220px] object-cover"
                 />
@@ -131,10 +131,10 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.url && (
+            {zone.image && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
-                  src={zone.image.url.startsWith('http') ? zone.image.url : `${API_URL}${zone.image.url}`}
+                  src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
                   alt={zone.title || "Image"}
                   className="rounded-2xl w-[350px] h-[220px] object-cover"
                 />
