@@ -6,3 +6,13 @@
     "VITE_API_URL": "@vite_api_url"
   }
   }
+
+  {
+    "redirects": [
+      {
+        "source": "http://:domain/:path*",
+        "destination": "https://:domain/:path*",
+        "permanent": true
+      }
+    ]
+  }
