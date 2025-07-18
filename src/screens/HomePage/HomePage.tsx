@@ -175,7 +175,7 @@ export const HomePage = (): JSX.Element => {
         <div className="flex flex-col items-center gap-10 w-full">
           {/* Main Heading */}
           <h1 className="w-full mt-[-1.00px] font-h1 font-[number:var(--h1-font-weight)] text-white text-[length:var(--h1-font-size)] text-center tracking-[var(--h1-letter-spacing)] leading-[var(--h1-line-height)] [font-style:var(--h1-font-style)]">
-            Tout votre vécu client.&nbsp;&nbsp;
+            Tout votre vécu clients.&nbsp;&nbsp;
             <br />
             En un seul endroit.
           </h1>
