@@ -13,10 +13,7 @@ interface AboutZone {
 }
 
 interface AboutData {
-  bannerImage?: { url: string };
-  leftzone1?: AboutZone[];
-  leftzone2?: AboutZone[];
-  rightzone?: AboutZone[];
+  bannerImage?: { url: string }[];
   bannerTitle?: string;
   bannerDescription?: string;
   leftzonetop?: AboutZone[];
@@ -31,13 +28,20 @@ export default function AboutPage() {
   const [data, setData] = useState<AboutData | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=bannerImage&populate[leftzonetop][populate][0]=image&populate[rightzonecenter][populate][0]=image&populate[leftzonebottom][populate][0]=image`)
+    fetch(`${API_URL}/api/abouts?locale=${lang}&populate=*`)
       .then(res => res.json())
       .then(json => {
-        const about = json.data && json.data[0]
-          ? json.data[0].attributes || json.data[0]
-          : null;
+        if (!json.data || !json.data[0]) {
+          setData(null);
+          return;
+        }
+        const about = json.data[0].attributes || json.data[0];
         setData(about);
+        console.log("About data:", about); // <-- Ajoute ce log pour voir ce que tu reçois
+      })
+      .catch(err => {
+        console.error("API error:", err);
+        setData(null);
       });
   }, [lang]);
 
@@ -54,8 +58,7 @@ export default function AboutPage() {
         <div className="flex flex-col justify-center px-16 py-12 w-1/2 bg-custom-hero-gradient text-white relative z-1">
           <nav className="mb-4 text-sm opacity-80">
             <span className="opacity-70">🏠 &gt; </span>
-            <a href="/ressources" className="underline">Ressources</a>
-            <span> &gt; À propos</span>
+            <span> À propos</span>
           </nav>
           <h1 className="text-5xl font-bold mb-8">{data.bannerTitle || "À propos"}</h1>
           <p className="text-xl">{data.bannerDescription || "Découvrez notre équipe et notre mission"}</p>
@@ -63,10 +66,10 @@ export default function AboutPage() {
         <div className="w-1/2 h-full relative">
           <img
             src={
-              data.bannerImage && data.bannerImage.url
-                ? data.bannerImage.url.startsWith('http')
-                  ? data.bannerImage.url
-                  : `${API_URL}${data.bannerImage.url}`
+              data.bannerImage && data.bannerImage.length > 0 && data.bannerImage[0].url
+                ? data.bannerImage[0].url.startsWith('http')
+                  ? data.bannerImage[0].url
+                  : `${API_URL}${data.bannerImage[0].url}`
                 : "/about-people.jpg"
             }
             alt="Bannière À propos"
@@ -89,13 +92,13 @@ export default function AboutPage() {
         }}
       >
         {/* leftzonetop */}
-        {data.leftzonetop && data.leftzonetop.map((zone, i) => (
+        {data.leftzonetop && data.leftzonetop.length > 0 && data.leftzonetop.map((zone, i) => (
           <div key={"leftzonetop-"+i} className="flex flex-row items-center justify-between max-w-6xl mx-auto gap-12 relative z-10">
             <div className="flex-1">
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.length > 0 && zone.image[0].url && (
+            {zone.image && Array.isArray(zone.image) && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
                   src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
@@ -113,7 +116,7 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.length > 0 && zone.image[0].url && (
+            {zone.image && Array.isArray(zone.image) && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
                   src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
@@ -131,7 +134,7 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">{zone.title || "Titre"}</h2>
               <p className="text-grey-800 text-lg">{zone.description || "Description"}</p>
             </div>
-            {zone.image && zone.image.length > 0 && zone.image[0].url && (
+            {zone.image && Array.isArray(zone.image) && zone.image.length > 0 && zone.image[0].url && (
               <div className="flex-1 flex justify-end">
                 <img
                   src={zone.image[0].url.startsWith('http') ? zone.image[0].url : `${API_URL}${zone.image[0].url}`}
