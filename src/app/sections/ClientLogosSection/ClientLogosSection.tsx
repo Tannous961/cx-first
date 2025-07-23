@@ -1,19 +1,9 @@
 "use client";
 
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Navigation, Autoplay } from "swiper/modules";
-
-
-// Style custom pour les flèches Swiper
-const swiperArrowStyle = `
-  .swiper-button-next, .swiper-button-prev {
-    color: rgb(93,194,228);
-    --swiper-navigation-color: rgb(93,194,228);
-    --swiper-navigation-size: 32px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-`;
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "./ClientLogosSection.module.scss";
 
 const logos = [
   "/ALAIN AFFLELOU blanc.svg",
@@ -27,13 +17,8 @@ const logos = [
 ];
 
 export default function ClientLogosSection() {
-  // Note : Refactoriser ce composant, non compatible avec NextJS
-  return null;
-
-  /*
   return (
-    <div className="w-full max-w-[1440px] mx-auto py-4">
-      <style>{swiperArrowStyle}</style>
+    <div className="swiper-container w-full max-w-[1440px] mx-auto py-4">
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={78}
@@ -61,5 +46,4 @@ export default function ClientLogosSection() {
       </Swiper>
     </div>
   );
-  */
 } 

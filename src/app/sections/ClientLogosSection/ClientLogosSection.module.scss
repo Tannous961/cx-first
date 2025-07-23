@@ -1,0 +1,9 @@
+.swiper-container {
+    .swiper-button-next, .swiper-button-prev {
+        color: rgb(93,194,228);
+        --swiper-navigation-color: rgb(93,194,228);
+        --swiper-navigation-size: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
