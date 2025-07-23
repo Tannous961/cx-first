@@ -10,8 +10,14 @@ import { VideoShowcaseSection } from "./sections/VideoShowcaseSection";
 import ClientLogosSection from "./sections/ClientLogosSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getEchangeExpertData } from "@/services/home";
 
-export default function Home() {
+// Todo : Ajouter un type pour le prop contactUsData (défini dans ContactUsSection.tsx actuellement)
+export default async function Home() {
+  // Todo : Langue à récupérer depuis un cookie
+  const lang = "fr";
+  const [homepageData, contactUsData] = await Promise.all([getEchangeExpertData(lang)]);
+
   // Partner logos data
   const partnerLogos = [
     { 
@@ -144,7 +150,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex flex-col w-full items-start relative bg-white overflow-hidden">
+    <>
       <HeaderSection />
 
       {/* Hero Section */}
@@ -251,8 +257,7 @@ export default function Home() {
       <DashboardSection />
       <MetricsOverviewSection />
       <TestimonialsSection />
-      <ContactUsSection />
-      <FooterSection />
-    </main>
+      <ContactUsSection data={contactUsData} />
+    </>
   );
 };

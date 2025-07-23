@@ -1,4 +1,4 @@
-import { API_URL } from '../lib/config';
+import { API_URL } from '@/lib/config';
 
 // Types pour les données Strapi
 export interface StrapiData<T> {

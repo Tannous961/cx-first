@@ -1,41 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
-import { API_URL } from "@/lib/config";
+import { EchangeExpert } from "@/services/home";
+import { ApiResult } from "@/services/api";
 
-// Type pour les données Strapi (flexible)
-interface EchangeExpert {
-  title?: string;
-  description?: string;
-  hero_title?: string;
-  hero_subtitle?: string;
-}
-
-export const ContactUsSection = () => {
-  const params = new URLSearchParams('/');
-  const lang = params.get("lang") || "fr";
-  const [data, setData] = useState<EchangeExpert | null>(null);
-
-  useEffect(() => {
-    fetch(`${API_URL}/api/echange-experts?locale=${lang}`)
-      .then(res => res.json())
-      .then(json => {
-        if (json.data && Array.isArray(json.data) && json.data.length > 0) {
-          setData(json.data[0]);
-        } else {
-          setData(null);
-        }
-      });
-  }, [lang]);
-
+export const ContactUsSection = ({data}: {data: ApiResult<EchangeExpert> | null}) => {
   if (!data) return null;
 
   // Mapping flexible : on prend hero_title/hero_subtitle si dispo, sinon title/description
-  const title = data.hero_title || data.title || "";
-  const description = data.hero_subtitle || data.description || "";
+  const title = data.data.hero_title || data.data.title || "";
+  const description = data.data.hero_subtitle || data.data.description || "";
 
   return (
+    <>
     <section className="w-full bg-dark-blue py-[120px] px-[30px] flex justify-center">
       <div className="flex flex-col items-center gap-[35px] max-w-[848px]">
         <div className="flex flex-col items-center gap-5 z-[2]">
@@ -57,6 +35,6 @@ export const ContactUsSection = () => {
           </span>
         </Button>
       </div>
-    </section>
+    </section></>
   );
 };
