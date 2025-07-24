@@ -8,7 +8,7 @@ export type HomePageData = {
 }
 
 export const getHomePageData = async (lang: string) => {
-  return await getApiData<HomePageData>('home-page', lang);
+  return await getApiData<HomePageData>('home-page', lang, '*');
 }
 
 export type EchangeExpert = {

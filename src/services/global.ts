@@ -1,5 +1,5 @@
 
-import { getApiData } from "./api";
+import { ApiImage, getApiData } from "./api";
 
 export type FooterData = {
   id: number;
@@ -20,4 +20,25 @@ export type FooterData = {
 
 export const getFooterData = async (lang: string) => {
   return await getApiData<FooterData>('footer', lang);
+};
+
+export type GlobalData = {
+  id: number;
+  documentId: string;
+  siteName: string;
+  siteDescription: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  favicon: ApiImage | null;
+  defaultSeo: {
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    shareImage: ApiImage | null;
+  }
+};
+
+export const getGlobalData = async (lang: string) => {
+  return await getApiData<GlobalData>('global', lang, ['favicon', 'defaultSeo.shareImage']);
 };

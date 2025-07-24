@@ -1,1 +1,1 @@
-export { default } from "./ClientLogosSection"; 
+export { ClientLogosSection } from "./ClientLogosSection"; 
