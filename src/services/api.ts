@@ -1,4 +1,4 @@
-import { API_URL } from '@/lib/config';
+import { API_URL, STRAPI_CACHE_ENABLED } from '@/lib/config';
 
 export type ApiResult<T> = {
   data: T;
@@ -25,7 +25,7 @@ export const getApiData = async <T>(
     }
     const response = await fetch(
       `${API_URL}/api/${endpoint}?${params.toString()}`,
-      { next: { revalidate: 3600 } }
+      { next: { revalidate: STRAPI_CACHE_ENABLED ? 3600 : false } }
     );
 
     if (!response.ok) {
