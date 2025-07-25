@@ -15,6 +15,9 @@ const currentEnv = isDevelopment ? 'development' : 'production';
 // URL de l'API Strapi (priorité aux variables d'environnement)
 export const API_URL = process.env.NEXT_PUBLIC_API_URL || environment[currentEnv].apiUrl;
 
+// URL de l'hôte pour les médias de Strapi
+export const MEDIA_URL = process.env.NEXT_PUBLIC_MEDIA_URL || API_URL;
+
 // Activer la mise en cache des données de Strapi
 export const STRAPI_CACHE_ENABLED = process.env.NEXT_PUBLIC_STRAPI_CACHE_DISABLED !== '1';
 

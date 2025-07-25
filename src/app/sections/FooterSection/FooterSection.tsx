@@ -137,7 +137,10 @@ export const FooterSection = ({
       <Separator className='w-[1336px] border-[#5dc2e4]' />
       <div className='flex flex-col w-full items-center pt-[33px] pb-0 px-0 relative'>
         <div className="relative w-fit mt-[-1.00px] [font-family:'DM_Sans',Helvetica] font-normal text-light-grey-blue text-sm text-center tracking-[0] leading-5 whitespace-nowrap">
-          © 2025 CX First. Tous droits réservés.
+          © 2025 CX First. By{' '}
+          <a href='https://www.atecna.fr' target='_blank'>
+            Atecna
+          </a>
         </div>
       </div>
 

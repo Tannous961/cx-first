@@ -12,7 +12,7 @@ export type ApiResult<T> = {
   };
 };
 
-export type ApiImageFormat = {
+export type ApiFileFormat = {
   ext: string;
   url: string;
   hash: string;
@@ -25,7 +25,7 @@ export type ApiImageFormat = {
   sizeInBytes: number;
 };
 
-export type ApiImage = {
+export type ApiFile = {
   id: number;
   documentId: string;
   name: string;
@@ -34,11 +34,11 @@ export type ApiImage = {
   width: number;
   height: number;
   formats: {
-    thumbnail?: ApiImageFormat;
-    small?: ApiImageFormat;
-    medium?: ApiImageFormat;
-    large?: ApiImageFormat;
-    [key: string]: ApiImageFormat | undefined;
+    thumbnail?: ApiFileFormat;
+    small?: ApiFileFormat;
+    medium?: ApiFileFormat;
+    large?: ApiFileFormat;
+    [key: string]: ApiFileFormat | undefined;
   };
   hash: string;
   ext: string;

@@ -1,5 +1,5 @@
 
-import { ApiImage, getApiData } from "./api";
+import { type ApiFile, getApiData } from "./api";
 
 export type FooterData = {
   id: number;
@@ -30,12 +30,12 @@ export type GlobalData = {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
-  favicon: ApiImage | null;
+  favicon: ApiFile | null;
   defaultSeo: {
     id: number;
     metaTitle: string;
     metaDescription: string;
-    shareImage: ApiImage | null;
+    shareImage: ApiFile | null;
   }
 };
 

@@ -5,6 +5,8 @@ import { ArrowRightIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { FilterBar } from '@/components/FilterBar';
 import { BlogCard } from '@/components/BlogCard';
+import type { ApiResult } from '@/services/api';
+import type { HomePageData } from '@/services/home';
 
 function getPageFromUrl() {
   if (typeof window === 'undefined') return 1;
@@ -13,18 +15,23 @@ function getPageFromUrl() {
   return isNaN(page) || page < 1 ? 1 : page;
 }
 
+type SolutionsSectionProps = {
+  homepageData: ApiResult<HomePageData> | null;
+  showFiltersAndBlogCards?: boolean;
+};
+
 // Ajout d'un prop pour contrôler l'affichage des filtres et BlogCards
 export const SolutionsSection = ({
+  homepageData,
   showFiltersAndBlogCards = true,
-}: {
-  showFiltersAndBlogCards?: boolean;
-}) => {
-  // Solution cards data for mapping
+}: SolutionsSectionProps) => {
   const solutionCards = [
     {
       id: 'connect',
-      title: 'CONNECT.',
+      title:
+        homepageData?.data?.solutionInfos?.connect?.[0]?.title || 'CONNECT.',
       description:
+        homepageData?.data?.solutionInfos?.connect?.[0]?.description ||
         "Centralisez toutes vos données d'expérience client et business dans une plateforme unique.",
       icon: '/icon-connect.svg',
       variant: 'primary',
@@ -32,15 +39,19 @@ export const SolutionsSection = ({
     },
     {
       id: 'explore',
-      title: 'EXPLORE.',
-      description: 'Diffusez des données fiables aux bons utilisateurs.',
+      title:
+        homepageData?.data?.solutionInfos?.explore?.[0]?.title || 'EXPLORE.',
+      description:
+        homepageData?.data?.solutionInfos?.explore?.[0]?.description ||
+        'Diffusez des données fiables aux bons utilisateurs.',
       icon: '/icon-explore.svg',
       variant: 'secondary',
     },
     {
       id: 'deploy',
-      title: 'DEPLOY.',
+      title: homepageData?.data?.solutionInfos?.deploy?.[0]?.title || 'DEPLOY.',
       description:
+        homepageData?.data?.solutionInfos?.deploy?.[0]?.description ||
         "Embarquez et impliquez les équipes grâce à des modules d'alerting, de gestion et suivi de plans d'actions, d'auto-évaluation, de to-do lists…",
       icon: '/icon-deploy.svg',
       variant: 'secondary',
@@ -144,14 +155,16 @@ export const SolutionsSection = ({
       <div className='flex flex-col items-start justify-center gap-20 relative'>
         <div className='flex flex-col w-full max-w-[1240px] items-center gap-5 relative'>
           <h2 className='relative w-fit mt-[-1.00px] font-h2 font-[number:var(--h2-font-weight)] text-dark-blue text-[length:var(--h2-font-size)] text-center tracking-[var(--h2-letter-spacing)] leading-[var(--h2-line-height)] whitespace-nowrap [font-style:var(--h2-font-style)]'>
-            Une solution complète pour vos données
+            {homepageData?.data?.solutionInfos?.title ||
+              'Une solution complète pour vos données'}
           </h2>
 
           <p className='relative max-w-[1027px] font-body-big font-[number:var(--body-big-font-weight)] text-grey text-[length:var(--body-big-font-size)] text-center tracking-[var(--body-big-letter-spacing)] leading-[var(--body-big-line-height)] [font-style:var(--body-big-font-style)]'>
-            Reprenez le contrôle de l&apos;expérience client : alignez vos
+            {homepageData?.data?.solutionInfos?.description ||
+              `Reprenez le contrôle de l&apos;expérience client : alignez vos
             données, vos équipes et vos décisions dans une plateforme unique,
             pensée pour piloter la performance en continu et à tous les niveaux
-            de l&apos;organisation.
+            de l&apos;organisation.`}
           </p>
         </div>
         {showFiltersAndBlogCards && (

@@ -1,15 +1,19 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import type { ApiResult } from '@/services/api';
+import type { HomePageData } from '@/services/home';
 
-export const BannerSection = () => {
+type BannerSectionProps = {
+  homepageData: ApiResult<HomePageData> | null;
+};
+
+export const BannerSection = ({ homepageData }: BannerSectionProps) => {
   return (
     <div className='flex flex-col w-full items-start gap-[50px] px-[80px] py-8 bg-[linear-gradient(180deg,rgba(0,13,27,1)_60%,rgba(119,192,224,1)_89%,rgba(255,255,255,1)_100%)]'>
       <div className='flex flex-col items-center gap-10 w-full'>
         {/* Main Heading */}
-        <h1 className='w-full mt-[-1.00px] font-h1 font-[number:var(--h1-font-weight)] text-white text-[length:var(--h1-font-size)] text-center tracking-[var(--h1-letter-spacing)] leading-[var(--h1-line-height)] [font-style:var(--h1-font-style)]'>
-          Tout votre vécu clientss.&nbsp;&nbsp;
-          <br />
-          En un seul endroit.
+        <h1 className='w-[950px] mt-[-1.00px] font-h1 font-[number:var(--h1-font-weight)] text-white text-[length:var(--h1-font-size)] text-center tracking-[var(--h1-letter-spacing)] leading-[var(--h1-line-height)] [font-style:var(--h1-font-style)]'>
+          {homepageData?.data?.banner?.title || ''}
         </h1>
 
         {/* Blue Glow Effect */}
@@ -38,12 +42,7 @@ export const BannerSection = () => {
               </div>
             </div>
             <p className='font-body-medium font-[number:var(--body-medium-font-weight)] text-white text-[length:var(--body-medium-font-size)] tracking-[var(--body-medium-letter-spacing)] leading-[var(--body-medium-line-height)] [font-style:var(--body-medium-font-style)]'>
-              CX First vous offre une vision claire et consolidée de
-              l&apos;expérience client et de la performance business. <br />
-              Une seule plateforme pour aligner les équipes, piloter les
-              priorités stratégiques et orienter les décisions à fort impact.{' '}
-              <br />
-              Fini les silos, place à l&apos;action.
+              {homepageData?.data?.banner?.description || ''}
             </p>
           </CardContent>
         </Card>
